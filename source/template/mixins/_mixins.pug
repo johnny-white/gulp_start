@@ -1,0 +1,10 @@
+//- svg icon
+
+mixin svg(id)
+	svg.icon
+		use(xlink:href="#" + id)
+
+//- font awesome
+
+mixin fa(icon)
+	i&attributes(attributes)(class=`fa ${icon.replace(/(\S+\b)/g, 'fa-$1')}` aria-hidden='true')

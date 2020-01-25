@@ -1,0 +1,128 @@
+@import "libs"
+
+@import "fonts"
+
+@import "vars"
+
+@import "_mixins/_breakpoints"
+
+@import "sprite"
+
+/* primary styles */
+
+body
+	font-family: $font-primary
+	color: $color-primary
+	min-height: 100vh
+	overflow-x: hidden
+	display: flex
+
+.page-wrapper
+	flex: 1 1 auto
+	display: flex
+	flex-direction: column
+	flex-wrap: nowrap
+	min-height: 100vh
+	width: 100%
+
+main.main
+	flex: 1 0 auto
+
+/* user presets */
+
+/* section */
+
+section.section
+	position: relative
+	z-index: 0
+	padding: 70px 0
+
++r768
+	section.section
+		padding: 90px 0
+
++r992
+	section.section
+		padding: 120px 0
+
++r1200
+	section.section
+		padding: 140px 0
+
+/* align content center */
+
+.align-container
+	display: table
+	width: 100%
+
+.align-container
+	&__item
+		display: table-cell
+		vertical-align: middle
+
+/* imgames */
+
+.img--bg
+	position: absolute
+	top: 0
+	left: 0
+	width: 100%
+	height: 100%
+	object-fit: cover
+	object-position: top center
+	z-index: -1
+
+.img--contain
+	position: absolute
+	top: 50%
+	left: 50%
+	transform: translate(-50%, -50%)
+	width: 100%
+	height: 100%
+	object-fit: contain
+	object-position: center center
+	z-index: -1
+
+/* margins */
+
+.bottom-20
+	margin-bottom: 20px !important
+
+.bottom-30
+	margin-bottom: 30px !important
+
+.bottom-40
+	margin-bottom: 40px !important
+
+.bottom-50
+	margin-bottom: 50px !important
+
+.bottom-60
+	margin-bottom: 60px !important
+
+.bottom-70
+	margin-bottom: 70px !important
+
+/* offset-margins */
+
+.offset-20
+	margin-bottom: -20px !important
+
+.offset-30
+	margin-bottom: -30px !important
+
+.offset-40
+	margin-bottom: -40px !important
+
+.offset-50
+	margin-bottom: -50px !important
+
+.offset-60
+	margin-bottom: -60px !important
+
+.offset-70
+	margin-bottom: -70px !important
+
+@import "../template/blocks/_header/_header"
+
+@import "../template/blocks/_footer/_footer"
