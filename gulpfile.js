@@ -50,22 +50,15 @@ var paths = {
 	},
 
 	images: {
-		src: './source/img/*',
+		src: ['./source/img/*', './source/img/*/*'],
 		dest: './assets/img',
 		watch: ['./source/img/*']
 	},
 
-	svg: {
-		src: ['./source/img/svg/*', './source/img/svg/*/*'],
-		dest: './assets/img/svg',
-		watch: ['./source/img/svg/*']
-	},
-
-
 	sprites: {
-		src: 'source/img/svg/*.svg',
-		dest: 'source/img/svg',
-		watch: ['./source/img/svg/*.svg']
+		src: './source/img/*.svg',
+		dest: './source/img',
+		watch: ['./source/img/*.svg']
 	},
 
 	fonts: {
@@ -129,7 +122,7 @@ gulp.task('js', function () {
 
 // javascript libs
 
-gulp.task('scripts', function () {
+gulp.task('libs', function () {
 	return gulp.src(paths.libs.src)
 		.pipe(plumber())
 		.pipe(concat('libs.min.js'))
@@ -144,14 +137,6 @@ gulp.task('images', function () {
 		.pipe(plumber())
 		// .pipe(imagemin())
 		.pipe(gulp.dest(paths.images.dest))
-})
-
-// svg icons
-
-gulp.task('svg', function () {
-	return gulp.src(paths.svg.src)
-		.pipe(plumber())
-		.pipe(gulp.dest(paths.svg.dest))
 })
 
 // svg sprite
@@ -206,17 +191,15 @@ gulp.task('server', function () {
 		server: {
 			baseDir: paths.dirs.assets
 		},
-		reloadOnRestart: true,
-		// tunnel: true  
+		reloadOnRestart: true
 	})
 
 	gulp.watch(paths.html.watch, gulp.parallel('pug'))
 	gulp.watch(paths.css.watch, gulp.parallel('styles'))
-	gulp.watch(paths.libs.watch, gulp.parallel('scripts'))
+	gulp.watch(paths.libs.watch, gulp.parallel('libs'))
 	gulp.watch(paths.js.watch, gulp.parallel('js'))
 	gulp.watch(paths.images.watch, gulp.parallel('images'))
 	gulp.watch(paths.sprites.watch, gulp.parallel('sprites'))
-	gulp.watch(paths.svg.watch, gulp.parallel('svg'))
 	gulp.watch(paths.fonts.watch, gulp.parallel('fonts'))
 
 })
@@ -232,10 +215,9 @@ gulp.task('clean', function () {
 gulp.task('build', gulp.series(
 	'clean',
 	'sprites',
-	'svg',
 	'pug',
 	'styles',
-	'scripts',
+	'libs',
 	'js',
 	'images',
 	'fonts'
