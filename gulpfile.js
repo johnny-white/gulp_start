@@ -135,7 +135,9 @@ gulp.task('libs', function () {
 gulp.task('images', function () {
 	return gulp.src(paths.images.src)
 		.pipe(plumber())
-		// .pipe(imagemin())
+		.pipe(imagemin({
+			verbose: true,
+		}))
 		.pipe(gulp.dest(paths.images.dest))
 })
 
