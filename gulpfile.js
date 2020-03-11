@@ -1,25 +1,26 @@
-var gulp = require('gulp'),
-	browserSync = require('browser-sync'),
-	pug = require('gulp-pug'),
-	sass = require('gulp-sass'),
-	cleanCSS = require('gulp-clean-css'),
-	sourcemaps = require('gulp-sourcemaps'),
-	autoprefixer = require('gulp-autoprefixer'),
-	plumber = require('gulp-plumber'),
-	gulpPugBeautify = require('gulp-pug-beautify'),
-	imagemin = require('gulp-imagemin'),
-	rename = require('gulp-rename'),
-	svgSprite = require('gulp-svg-sprite'),
-	svgmin = require('gulp-svgmin'),
-	cheerio = require('gulp-cheerio'),
-	replace = require('gulp-replace'),
-	concat = require('gulp-concat'),
-	uglify = require('gulp-uglify'),
-	del = require('del')
+const	gulp = require('gulp'),
+		browserSync = require('browser-sync'),
+		pug = require('gulp-pug'),
+		sass = require('gulp-sass'),
+		cleanCSS = require('gulp-clean-css'),
+		sourcemaps = require('gulp-sourcemaps'),
+		autoprefixer = require('gulp-autoprefixer'),
+		plumber = require('gulp-plumber'),
+		gulpPugBeautify = require('gulp-pug-beautify'),
+		imagemin = require('gulp-imagemin'),
+		rename = require('gulp-rename'),
+		svgSprite = require('gulp-svg-sprite'),
+		svgmin = require('gulp-svgmin'),
+		cheerio = require('gulp-cheerio'),
+		replace = require('gulp-replace'),
+		concat = require('gulp-concat'),
+		uglify = require('gulp-uglify'),
+		uglifyEs = require('gulp-uglify-es').default,
+		del = require('del')
 
 // paths
 
-var paths = {
+const paths = {
 
 	dirs: {
 		assets: './assets'
@@ -27,6 +28,7 @@ var paths = {
 
 	html: {
 		src: ['./source/template/pages/*.pug', './source/template/elements/*.pug'],
+		// src: './source/template/pages/*.pug',
 		dest: './assets',
 		watch: ['./source/template/pages/*.pug', './source/template/blocks/**/*.pug', './source/template/layouts/*.pug', './source/template/elements/*.pug', './source/template/mixins/*.pug']
 	},
@@ -113,7 +115,7 @@ gulp.task('js', function () {
 	return gulp.src(paths.js.src)
 		.pipe(plumber())
 		.pipe(rename({ suffix: '.min', prefix: '' }))
-		.pipe(uglify())
+		.pipe(uglifyEs())
 		.pipe(gulp.dest(paths.js.dest))
 		.pipe(browserSync.reload({
 			stream: true
@@ -165,7 +167,7 @@ gulp.task('sprites', function () {
 					sprite: "sprite/",
 					render: {
 						scss: {
-							dest: '../../../../source/styles/sprite.scss',
+							dest: '../../../source/styles/sprite.scss',
 							template: 'source/styles/_mixins/_sprite.scss'
 						}
 					}

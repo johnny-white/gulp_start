@@ -1,0 +1,108 @@
+/* menu dropdown start */
+
+.menu-dropdown
+	display: initial
+	position: fixed
+	width: 100%
+	height: 100%
+	opacity: 0
+	visibility: hidden
+	z-index: 5
+	background: rgba(0, 0, 0, 0.3)
+	transition: all .3s
+
++r992
+
+	.menu-dropdown
+		display: none
+
+.menu-dropdown
+	&__inner
+		position: fixed
+		width: auto
+		height: 100%
+		overflow-y: auto
+		transform: translateX(-100%)
+		visibility: hidden
+		transition: all .3s
+
+.menu-dropdown--active
+	visibility: visible
+	opacity: 1
+
+.menu-dropdown--active
+	.menu-dropdown__inner:first-of-type,
+	.menu-dropdown__inner--active
+		visibility: visible
+		transform: translateX(0)
+
+.screen
+	position: relative
+	width: 320px
+	min-height: 100%
+	padding: 100px 15px 50px 15px
+	background-color: #1E252B
+
+.screen--start
+	filter: grayscale(0)
+	transition: filter .3s
+
+.screen--inactive
+	filter: grayscale(1)
+
+.screen.screen--sub
+	padding: 80px 15px 50px 15px
+
+.screen
+	&__heading
+		position: relative
+		color: rgba(255, 255, 255, 0.87)
+		padding-bottom: 12px
+		margin-bottom: 27px
+		user-select: none
+	&__heading::after
+		content: ""
+		display: block
+		height: 1px
+		width: calc(100% + 30px)
+		background: #303D48
+		position: absolute
+		bottom: 0
+		left: -15px
+	&__back
+		color: rgba(255, 255, 255, 0.87)
+		font-size: 20px
+		line-height: 27px
+		font-weight: 500
+		margin-bottom: 0
+		padding: 5px 30px
+		cursor: pointer
+		text-align: center
+		position: relative
+	&__back .icon
+		font-size: 14px
+		position: absolute
+		left: 0
+		top: 50%
+		transform: translateY(-50%)
+	&__item
+		display: flex
+		align-items: center
+		justify-content: space-between
+		cursor: pointer
+		font-size: 14px
+		line-height: 20px
+		text-transform: uppercase
+	&__item,
+	&__link,
+	&__item:hover,
+	&__link:hover
+		color: rgba(255, 255, 255, 0.87)
+	&__item span:first-of-type
+		width: 80%
+	&__item span:nth-of-type(2)
+		font-size: 12px
+	&__item:not(:last-of-type)
+		margin-bottom: 30px
+
+/* menu dropdown end */

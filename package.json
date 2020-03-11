@@ -18,6 +18,8 @@
 		"gulp-sourcemaps": "^2.6.5",
 		"gulp-svg-sprite": "^1.5.0",
 		"gulp-svgmin": "^2.2.0",
-		"gulp-uglify": "^3.0.2"
-	}
+		"gulp-uglify": "^3.0.2",
+		"gulp-uglify-es": "^2.0.0"
+	},
+	"dependencies": {}
 }
