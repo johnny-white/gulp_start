@@ -16,6 +16,8 @@ const	gulp = require('gulp'),
 		concat = require('gulp-concat'),
 		uglify = require('gulp-uglify'),
 		uglifyEs = require('gulp-uglify-es').default,
+		gutil = require('gulp-util'),
+		ftp = require('vinyl-ftp'),
 		del = require('del')
 
 // paths
@@ -51,6 +53,12 @@ const paths = {
 		watch: './source/js/*.js'
 	},
 
+	php: {
+		src: './source/template/pages/*.php',
+		dest: './assets/',
+		watch: './source/template/pages/*.php'
+	},
+
 	images: {
 		src: ['./source/img/*', './source/img/*/*'],
 		dest: './assets/img',
@@ -67,6 +75,10 @@ const paths = {
 		src: './source/fonts/**/*',
 		dest: './assets/fonts',
 		watch: './source/fonts'
+	},
+
+	deploy: {
+		src: './assets/**'
 	}
 
 }
@@ -122,6 +134,17 @@ gulp.task('js', function () {
 		}))
 })
 
+// php
+
+gulp.task('php', function () {
+	return gulp.src(paths.php.src)
+		.pipe(plumber())
+		.pipe(gulp.dest(paths.php.dest))
+		.pipe(browserSync.reload({
+			stream: true
+		}))
+})
+
 // javascript libs
 
 gulp.task('libs', function () {
@@ -137,9 +160,9 @@ gulp.task('libs', function () {
 gulp.task('images', function () {
 	return gulp.src(paths.images.src)
 		.pipe(plumber())
-		.pipe(imagemin({
-			verbose: true,
-		}))
+		// .pipe(imagemin({
+		// 	verbose: true,
+		// }))
 		.pipe(gulp.dest(paths.images.dest))
 })
 
@@ -188,6 +211,21 @@ gulp.task('fonts', function () {
 		}))
 })
 
+// deploy
+
+gulp.task('deploy', function () {
+	const hosting = ftp.create({
+		host: 'hostname',
+		user: 'username',
+		password: 'userpassword',
+		parallel: 10,
+		log: gutil.log
+	})
+	return gulp.src(paths.deploy.src)
+		.pipe(hosting.newer('path.to.hosting.folder')) // upload new files
+		.pipe(hosting.dest('path.to.hosting.folder')) // upload all files
+})
+
 // server
 
 gulp.task('server', function () {
@@ -202,6 +240,7 @@ gulp.task('server', function () {
 	gulp.watch(paths.css.watch, gulp.parallel('styles'))
 	gulp.watch(paths.libs.watch, gulp.parallel('libs'))
 	gulp.watch(paths.js.watch, gulp.parallel('js'))
+	gulp.watch(paths.php.watch, gulp.parallel('php'))
 	gulp.watch(paths.images.watch, gulp.parallel('images'))
 	gulp.watch(paths.sprites.watch, gulp.parallel('sprites'))
 	gulp.watch(paths.fonts.watch, gulp.parallel('fonts'))
@@ -223,6 +262,7 @@ gulp.task('build', gulp.series(
 	'styles',
 	'libs',
 	'js',
+	'php',
 	'images',
 	'fonts'
 ))

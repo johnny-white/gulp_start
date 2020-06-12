@@ -8,17 +8,14 @@ html(lang="en")
 
 	body
 
-		.page-wrapper
+		include ../blocks/_menu-dropdown/_menu-dropdown
 
+		include ../blocks/_header/_header
 
-			include ../blocks/_menu-dropdown/_menu-dropdown
+		main.main
 
-			include ../blocks/_header/_header
+			block main
 
-			main.main
-
-				block main
-
-			include ../blocks/_footer/_footer
+		include ../blocks/_footer/_footer
 
 		include ../blocks/_scripts/_scripts

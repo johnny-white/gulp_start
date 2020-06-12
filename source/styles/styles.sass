@@ -16,49 +16,28 @@ body
 	min-height: 100vh
 	overflow-x: hidden
 	display: flex
-
-.page-wrapper
-	flex: 1 1 auto
-	display: flex
 	flex-direction: column
-	flex-wrap: nowrap
-	min-height: 100vh
-	width: 100%
+
+body.body--static
+	height: 100%
+	overflow: hidden
+
++r992
+
+	body.body--static
+		min-height: 100vh
+		overflow: auto
+		overflow-x: hidden
 
 main.main
 	flex: 1 0 auto
 
-/* section */
+/* modificators */
 
-section.section
-	position: relative
-	z-index: 0
-	padding: 70px 0
-
-+r768
-	section.section
-		padding: 90px 0
-
-+r992
-	section.section
-		padding: 120px 0
-
-+r1200
-	section.section
-		padding: 140px 0
-
-/* align content center */
-
-.align-container
-	display: table
-	width: 100%
-
-.align-container
-	&__item
-		display: table-cell
-		vertical-align: middle
-
-/* imgames */
+.list--reset
+	padding: 0
+	margin: 0
+	list-style: none
 
 .img--bg
 	position: absolute
@@ -67,7 +46,7 @@ section.section
 	width: 100%
 	height: 100%
 	object-fit: cover
-	object-position: top center
+	object-position: center center
 	z-index: -1
 
 .img--contain
@@ -81,33 +60,124 @@ section.section
 	object-position: center center
 	z-index: -1
 
+/* section */
+
+section.section
+	position: relative
+	z-index: 0
+	padding: 70px 0
+
++r768
+
+	section.section
+		padding: 90px 0
+
++r992
+
+	section.section
+		padding: 120px 0
+
++r1200
+
+	section.section
+		padding: 140px 0
+
+/* table align content center */
+
+.align-container
+	display: table
+	width: 100%
+
+.align-container
+	&__item
+		display: table-cell
+		vertical-align: middle
+
 /* top margins */
 
+.top-10
+	margin-top: 10px
+
 .top-20
-	margin-top: 20px !important
+	margin-top: 20px
 
 .top-30
-	margin-top: 30px !important
+	margin-top: 30px
 
 .top-40
-	margin-top: 40px !important
+	margin-top: 40px
 
 .top-50
-	margin-top: 50px !important
+	margin-top: 50px
+
+.top-60
+	margin-top: 60px
+
+.top-70
+	margin-top: 70px
+
++r576
+
+	.top-sm-0
+		margin-top: 0px !important
+
++r768
+
+	.top-md-0
+		margin-top: 0px !important
+
++r992
+
+	.top-lg-0
+		margin-top: 0px !important
+
++r1200
+
+	.top-xl-0
+		margin-top: 0px !important
 
 /* bottom margins */
 
+.bottom-10
+	margin-bottom: 10px
+
 .bottom-20
-	margin-bottom: 20px !important
+	margin-bottom: 20px
 
 .bottom-30
-	margin-bottom: 30px !important
+	margin-bottom: 30px
 
 .bottom-40
-	margin-bottom: 40px !important
+	margin-bottom: 40px
 
 .bottom-50
-	margin-bottom: 50px !important
+	margin-bottom: 50px
+
+.bottom-60
+	margin-bottom: 60px
+
+.bottom-70
+	margin-bottom: 70px
+
++r576
+
+	.bottom-sm-0
+		margin-bottom: 0px !important
+
++r768
+
+	.bottom-md-0
+		margin-bottom: 0px !important
+
++r992
+
+	.bottom-lg-0
+		margin-bottom: 0px !important
+
++r1200
+
+	.bottom-xl-0
+		margin-bottom: 0px !important
 
 /* offset-margins */
 
@@ -122,6 +192,12 @@ section.section
 
 .offset-50
 	margin-bottom: -50px !important
+
+.offset-60
+	margin-bottom: -60px !important
+
+.offset-70
+	margin-bottom: -70px !important
 
 @import "../template/blocks/_menu-dropdown/_menu-dropdown"
 
