@@ -1,15 +1,10 @@
 @import "libs"
-
 @import "fonts"
-
 @import "vars"
-
 @import "_mixins/_breakpoints"
-
 @import "sprite"
 
 /* primary styles */
-
 body
 	font-family: $font-primary
 	color: $color-primary
@@ -23,7 +18,6 @@ body.body--static
 	overflow: hidden
 
 +r992
-
 	body.body--static
 		min-height: 100vh
 		overflow: auto
@@ -33,7 +27,6 @@ main.main
 	flex: 1 0 auto
 
 /* modificators */
-
 .list--reset
 	padding: 0
 	margin: 0
@@ -61,7 +54,6 @@ main.main
 	z-index: -1
 
 /* section */
-
 section.section
 	position: relative
 	z-index: 0
@@ -83,7 +75,6 @@ section.section
 		padding: 140px 0
 
 /* table align content center */
-
 .align-container
 	display: table
 	width: 100%
@@ -94,7 +85,6 @@ section.section
 		vertical-align: middle
 
 /* top margins */
-
 .top-10
 	margin-top: 10px
 
@@ -117,27 +107,22 @@ section.section
 	margin-top: 70px
 
 +r576
-
 	.top-sm-0
 		margin-top: 0px !important
 
 +r768
-
 	.top-md-0
 		margin-top: 0px !important
 
 +r992
-
 	.top-lg-0
 		margin-top: 0px !important
 
 +r1200
-
 	.top-xl-0
 		margin-top: 0px !important
 
 /* bottom margins */
-
 .bottom-10
 	margin-bottom: 10px
 
@@ -160,27 +145,22 @@ section.section
 	margin-bottom: 70px
 
 +r576
-
 	.bottom-sm-0
 		margin-bottom: 0px !important
 
 +r768
-
 	.bottom-md-0
 		margin-bottom: 0px !important
 
 +r992
-
 	.bottom-lg-0
 		margin-bottom: 0px !important
 
 +r1200
-
 	.bottom-xl-0
 		margin-bottom: 0px !important
 
 /* offset-margins */
-
 .offset-20
 	margin-bottom: -20px !important
 
@@ -200,9 +180,6 @@ section.section
 	margin-bottom: -70px !important
 
 @import "../template/blocks/_menu-dropdown/_menu-dropdown"
-
 @import "../template/blocks/_menu-trigger/_menu-trigger"
-
 @import "../template/blocks/_header/_header"
-
 @import "../template/blocks/_footer/_footer"

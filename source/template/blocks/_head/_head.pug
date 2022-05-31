@@ -6,11 +6,9 @@ meta(http-equiv="X-UA-Compatible" content="ie=edge")
 title HTML Template
 
 // styles
-
 link(rel="stylesheet" href="css/styles.min.css")
 
 // web-font loader
-
 script.
 
 	WebFontConfig = {
@@ -22,7 +20,6 @@ script.
 	}
 
 	function font() {
-
 		var wf = document.createElement('script')
 
 		wf.src = ('https:' == document.location.protocol ? 'https' : 'http') + '://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js'
@@ -32,7 +29,6 @@ script.
 		var s = document.getElementsByTagName('script')[0]
 
 		s.parentNode.insertBefore(wf, s)
-
 	}
 
 	font()
