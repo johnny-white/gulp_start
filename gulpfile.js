@@ -44,7 +44,7 @@ const paths = {
     dest: './dist',
     watch: [
       './src/template/pages/*.pug',
-      './src/template/blocks/**/*.pug',
+      './src/template/components/**/*.pug',
       './src/template/layouts/*.pug',
       './src/template/elements/*.pug',
       './src/template/mixins/*.pug',
@@ -55,7 +55,7 @@ const paths = {
     src: './src/styles/styles.sass',
     dest: './dist/css',
     watch: [
-      './src/template/blocks/**/*.sass',
+      './src/template/components/**/*.sass',
       './src/styles/**/*.sass',
       './src/styles/*.sass',
     ],
