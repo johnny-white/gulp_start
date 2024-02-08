@@ -1,98 +1,109 @@
-const gulp = require("gulp"),
-  browserSync = require("browser-sync"),
-  pug = require("gulp-pug"),
-  sass = require("gulp-sass"),
-  cleanCSS = require("gulp-clean-css"),
-  sourcemaps = require("gulp-sourcemaps"),
-  autoprefixer = require("gulp-autoprefixer"),
-  plumber = require("gulp-plumber"),
-  gulpPugBeautify = require("gulp-pug-beautify"),
-  imagemin = require("gulp-imagemin"),
-  rename = require("gulp-rename"),
-  svgSprite = require("gulp-svg-sprite"),
-  svgmin = require("gulp-svgmin"),
-  cheerio = require("gulp-cheerio"),
-  replace = require("gulp-replace"),
-  concat = require("gulp-concat"),
-  uglify = require("gulp-uglify"),
-  uglifyEs = require("gulp-uglify-es").default,
-  gutil = require("gulp-util"),
-  ftp = require("vinyl-ftp"),
-  del = require("del");
+import gulp from 'gulp';
+
+import pug from 'gulp-pug';
+import gulpPugBeautify from 'gulp-pug-beautify';
+
+import gulpSass from 'gulp-sass';
+import dartSass from 'sass';
+
+import autoprefixer from 'gulp-autoprefixer';
+import cleanCSS from 'gulp-clean-css';
+import sourcemaps from 'gulp-sourcemaps';
+
+import uglify from 'gulp-uglify';
+
+import imagemin from 'gulp-imagemin';
+
+import svgSprite from 'gulp-svg-sprite';
+import cheerio from 'gulp-cheerio';
+import svgmin from 'gulp-svgmin';
+
+import browserSync from 'browser-sync';
+
+import plumber from 'gulp-plumber';
+import replace from 'gulp-replace';
+import rename from 'gulp-rename';
+import concat from 'gulp-concat';
+
+import gutil from 'gulp-util';
+import ftp from 'vinyl-ftp';
+
+import { deleteAsync } from 'del';
+
+const sass = gulpSass(dartSass);
 
 // paths
 const paths = {
   dirs: {
-    assets: "./assets",
+    dist: './dist',
   },
 
   html: {
-    src: ["./source/template/pages/*.pug", "./source/template/elements/*.pug"],
+    src: ['./source/template/pages/*.pug', './source/template/elements/*.pug'],
     // src: './source/template/pages/*.pug',
-    dest: "./assets",
+    dest: './dist',
     watch: [
-      "./source/template/pages/*.pug",
-      "./source/template/blocks/**/*.pug",
-      "./source/template/layouts/*.pug",
-      "./source/template/elements/*.pug",
-      "./source/template/mixins/*.pug",
+      './source/template/pages/*.pug',
+      './source/template/blocks/**/*.pug',
+      './source/template/layouts/*.pug',
+      './source/template/elements/*.pug',
+      './source/template/mixins/*.pug',
     ],
   },
 
   css: {
-    src: "./source/styles/styles.sass",
-    dest: "./assets/css",
+    src: './source/styles/styles.sass',
+    dest: './dist/css',
     watch: [
-      "./source/template/blocks/**/*.sass",
-      "./source/styles/**/*.sass",
-      "./source/styles/*.sass",
+      './source/template/blocks/**/*.sass',
+      './source/styles/**/*.sass',
+      './source/styles/*.sass',
     ],
   },
 
   libs: {
-    src: ["./source/libs/**/*.js"],
-    dest: "./assets/js",
-    watch: "./source/libs/**/*.js",
+    src: ['./source/libs/**/*.js'],
+    dest: './dist/js',
+    watch: './source/libs/**/*.js',
   },
 
   js: {
-    src: "./source/js/*.js",
-    dest: "./assets/js",
-    watch: "./source/js/*.js",
+    src: './source/js/*.js',
+    dest: './dist/js',
+    watch: './source/js/*.js',
   },
 
   php: {
-    src: "./source/template/pages/*.php",
-    dest: "./assets/",
-    watch: "./source/template/pages/*.php",
+    src: './source/template/pages/*.php',
+    dest: './dist/',
+    watch: './source/template/pages/*.php',
   },
 
   images: {
-    src: ["./source/img/*", "./source/img/*/*"],
-    dest: "./assets/img",
-    watch: ["./source/img/*"],
+    src: ['./source/img/*', './source/img/*/*'],
+    dest: './dist/img',
+    watch: ['./source/img/*'],
   },
 
   sprites: {
-    src: "./source/img/*.svg",
-    dest: "./source/img",
-    watch: ["./source/img/*.svg"],
+    src: './source/img/*.svg',
+    dest: './source/img',
+    watch: ['./source/img/*.svg'],
   },
 
   fonts: {
-    src: "./source/fonts/**/*",
-    dest: "./assets/fonts",
-    watch: "./source/fonts",
+    src: './source/fonts/**/*',
+    dest: './dist/fonts',
+    watch: './source/fonts',
   },
 
   deploy: {
-    src: "./assets/**",
+    src: './dist/**',
   },
 };
 
 // pug
-
-gulp.task("pug", function () {
+gulp.task('pug', function () {
   return gulp
     .src(paths.html.src)
     .pipe(plumber())
@@ -117,7 +128,7 @@ gulp.task("pug", function () {
 });
 
 // styles
-gulp.task("styles", function () {
+gulp.task('styles', function () {
   return gulp
     .src(paths.css.src)
     .pipe(plumber())
@@ -128,9 +139,9 @@ gulp.task("styles", function () {
       })
     )
     .pipe(sourcemaps.init())
-    .pipe(rename({ suffix: ".min", prefix: "" }))
+    .pipe(rename({ suffix: '.min', prefix: '' }))
     .pipe(cleanCSS())
-    .pipe(sourcemaps.write("."))
+    .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest(paths.css.dest))
     .pipe(
       browserSync.reload({
@@ -139,13 +150,13 @@ gulp.task("styles", function () {
     );
 });
 
-// user js
-gulp.task("js", function () {
+// js
+gulp.task('js', function () {
   return gulp
     .src(paths.js.src)
     .pipe(plumber())
-    .pipe(rename({ suffix: ".min", prefix: "" }))
-    .pipe(uglifyEs())
+    .pipe(rename({ suffix: '.min', prefix: '' }))
+    .pipe(uglify())
     .pipe(gulp.dest(paths.js.dest))
     .pipe(
       browserSync.reload({
@@ -154,8 +165,18 @@ gulp.task("js", function () {
     );
 });
 
+// js libs
+gulp.task('libs', function () {
+  return gulp
+    .src(paths.libs.src)
+    .pipe(plumber())
+    .pipe(concat('libs.min.js'))
+    .pipe(uglify())
+    .pipe(gulp.dest(paths.libs.dest));
+});
+
 // php
-gulp.task("php", function () {
+gulp.task('php', function () {
   return gulp
     .src(paths.php.src)
     .pipe(plumber())
@@ -167,18 +188,8 @@ gulp.task("php", function () {
     );
 });
 
-// javascript libs
-gulp.task("libs", function () {
-  return gulp
-    .src(paths.libs.src)
-    .pipe(plumber())
-    .pipe(concat("libs.min.js"))
-    .pipe(uglify())
-    .pipe(gulp.dest(paths.libs.dest));
-});
-
 // images
-gulp.task("images", function () {
+gulp.task('images', function () {
   return (
     gulp
       .src(paths.images.src)
@@ -191,7 +202,7 @@ gulp.task("images", function () {
 });
 
 // svg sprite
-gulp.task("sprites", function () {
+gulp.task('sprites', function () {
   return gulp
     .src(paths.sprites.src)
     .pipe(
@@ -204,23 +215,23 @@ gulp.task("sprites", function () {
     .pipe(
       cheerio({
         run: function ($) {
-          $("[fill]").removeAttr("fill");
-          $("[stroke]").removeAttr("stroke");
-          $("[style]").removeAttr("style");
+          $('[fill]').removeAttr('fill');
+          $('[stroke]').removeAttr('stroke');
+          $('[style]').removeAttr('style');
         },
         parserOptions: { xmlMode: true },
       })
     )
-    .pipe(replace("&gt;", ">"))
+    .pipe(replace('&gt;', '>'))
     .pipe(
       svgSprite({
         mode: {
           symbol: {
-            sprite: "sprite/",
+            sprite: 'sprite/',
             render: {
               scss: {
-                dest: "../../../source/styles/sprite.scss",
-                template: "source/styles/_mixins/_sprite.scss",
+                dest: '../../../source/styles/sprite.scss',
+                template: 'source/styles/_mixins/_sprite.scss',
               },
             },
           },
@@ -231,7 +242,7 @@ gulp.task("sprites", function () {
 });
 
 // fonts
-gulp.task("fonts", function () {
+gulp.task('fonts', function () {
   return gulp
     .src(paths.fonts.src)
     .pipe(plumber())
@@ -244,58 +255,58 @@ gulp.task("fonts", function () {
 });
 
 // deploy
-gulp.task("deploy", function () {
+gulp.task('deploy', function () {
   const hosting = ftp.create({
-    host: "hostname",
-    user: "username",
-    password: "userpassword",
+    host: 'hostname',
+    user: 'username',
+    password: 'userpassword',
     parallel: 10,
     log: gutil.log,
   });
   return gulp
     .src(paths.deploy.src)
-    .pipe(hosting.newer("path.to.hosting.folder")) // upload new files
-    .pipe(hosting.dest("path.to.hosting.folder")); // upload all files
+    .pipe(hosting.newer('path.to.hosting.folder')) // upload new files
+    .pipe(hosting.dest('path.to.hosting.folder')); // upload all files
 });
 
 // server
-gulp.task("server", function () {
+gulp.task('server', function () {
   browserSync.init({
     server: {
-      baseDir: paths.dirs.assets,
+      baseDir: paths.dirs.dist,
     },
     reloadOnRestart: true,
   });
 
-  gulp.watch(paths.html.watch, gulp.parallel("pug"));
-  gulp.watch(paths.css.watch, gulp.parallel("styles"));
-  gulp.watch(paths.libs.watch, gulp.parallel("libs"));
-  gulp.watch(paths.js.watch, gulp.parallel("js"));
-  gulp.watch(paths.php.watch, gulp.parallel("php"));
-  gulp.watch(paths.images.watch, gulp.parallel("images"));
-  gulp.watch(paths.sprites.watch, gulp.parallel("sprites"));
-  gulp.watch(paths.fonts.watch, gulp.parallel("fonts"));
+  gulp.watch(paths.html.watch, gulp.parallel('pug'));
+  gulp.watch(paths.css.watch, gulp.parallel('styles'));
+  gulp.watch(paths.libs.watch, gulp.parallel('libs'));
+  gulp.watch(paths.js.watch, gulp.parallel('js'));
+  gulp.watch(paths.php.watch, gulp.parallel('php'));
+  gulp.watch(paths.images.watch, gulp.parallel('images'));
+  gulp.watch(paths.sprites.watch, gulp.parallel('sprites'));
+  gulp.watch(paths.fonts.watch, gulp.parallel('fonts'));
 });
 
 // clean
-gulp.task("clean", function () {
-  return del(paths.dirs.assets);
+gulp.task('clean', function () {
+  return deleteAsync(paths.dirs.dist);
 });
 
 // build
 gulp.task(
-  "build",
+  'build',
   gulp.series(
-    "clean",
-    "sprites",
-    "pug",
-    "styles",
-    "libs",
-    "js",
-    "php",
-    "images",
-    "fonts"
+    'clean',
+    'sprites',
+    'pug',
+    'styles',
+    'libs',
+    'js',
+    'php',
+    'images',
+    'fonts'
   )
 );
 
-gulp.task("dev", gulp.series("build", "server"));
+gulp.task('dev', gulp.series('build', 'server'));
