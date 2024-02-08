@@ -1,8 +1,10 @@
-requires:
-    1. npm (https://www.npmjs.com/);
-    2. node.js (https://nodejs.org).
+# gulp-pug starter template v2.0.0
 
-in project folder run cmd:
-    1. install all dependencies: 'npm install';
-    2. build + local server start: 'gulp dev';
-    3. build only: 'gulp build'.
+## requires:
+    - npm (https://www.npmjs.com/);
+    - node.js (https://nodejs.org).
+
+## in project folder commands:
+    - 'npm install' - install all dependencies;
+    - 'gulp dev' - build + local server start;
+    - 'gulp build' - build only.
