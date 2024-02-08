@@ -39,62 +39,62 @@ const paths = {
   },
 
   html: {
-    src: ['./source/template/pages/*.pug', './source/template/elements/*.pug'],
-    // src: './source/template/pages/*.pug',
+    src: ['./src/template/pages/*.pug', './src/template/elements/*.pug'],
+    // src: './src/template/pages/*.pug',
     dest: './dist',
     watch: [
-      './source/template/pages/*.pug',
-      './source/template/blocks/**/*.pug',
-      './source/template/layouts/*.pug',
-      './source/template/elements/*.pug',
-      './source/template/mixins/*.pug',
+      './src/template/pages/*.pug',
+      './src/template/blocks/**/*.pug',
+      './src/template/layouts/*.pug',
+      './src/template/elements/*.pug',
+      './src/template/mixins/*.pug',
     ],
   },
 
   css: {
-    src: './source/styles/styles.sass',
+    src: './src/styles/styles.sass',
     dest: './dist/css',
     watch: [
-      './source/template/blocks/**/*.sass',
-      './source/styles/**/*.sass',
-      './source/styles/*.sass',
+      './src/template/blocks/**/*.sass',
+      './src/styles/**/*.sass',
+      './src/styles/*.sass',
     ],
   },
 
   libs: {
-    src: ['./source/libs/**/*.js'],
+    src: ['./src/libs/**/*.js'],
     dest: './dist/js',
-    watch: './source/libs/**/*.js',
+    watch: './src/libs/**/*.js',
   },
 
   js: {
-    src: './source/js/*.js',
+    src: './src/js/*.js',
     dest: './dist/js',
-    watch: './source/js/*.js',
+    watch: './src/js/*.js',
   },
 
   php: {
-    src: './source/template/pages/*.php',
+    src: './src/template/pages/*.php',
     dest: './dist/',
-    watch: './source/template/pages/*.php',
+    watch: './src/template/pages/*.php',
   },
 
   images: {
-    src: ['./source/img/*', './source/img/*/*'],
+    src: ['./src/img/*', './src/img/*/*'],
     dest: './dist/img',
-    watch: ['./source/img/*'],
+    watch: ['./src/img/*'],
   },
 
   sprites: {
-    src: './source/img/*.svg',
-    dest: './source/img',
-    watch: ['./source/img/*.svg'],
+    src: './src/img/*.svg',
+    dest: './src/img',
+    watch: ['./src/img/*.svg'],
   },
 
   fonts: {
-    src: './source/fonts/**/*',
+    src: './src/fonts/**/*',
     dest: './dist/fonts',
-    watch: './source/fonts',
+    watch: './src/fonts',
   },
 
   deploy: {
@@ -230,8 +230,8 @@ gulp.task('sprites', function () {
             sprite: 'sprite/',
             render: {
               scss: {
-                dest: '../../../source/styles/sprite.scss',
-                template: 'source/styles/_mixins/_sprite.scss',
+                dest: '../../../src/styles/sprite.scss',
+                template: 'src/styles/_mixins/_sprite.scss',
               },
             },
           },
